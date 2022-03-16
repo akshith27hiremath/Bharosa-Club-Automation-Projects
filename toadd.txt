@@ -1,0 +1,2 @@
+add randomness in timing
+look into proxies and selenium
