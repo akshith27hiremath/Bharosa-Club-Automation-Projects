@@ -1,9 +1,11 @@
 require 'selenium-webdriver'
 $tab = Selenium::WebDriver::Keys::KEYS[:tab]
 Selenium::WebDriver::Chrome.driver_path = "D:/chromedriver.exe"
-$driver = Selenium::WebDriver.for :chrome
+options = Selenium::WebDriver::Chrome::Options.new
+options.add_argument('--headless')
+$driver = Selenium::WebDriver.for :chrome, options: options
 $driver.get("https://www.camsonline.com/Investors/Statements/Consolidated-Account-Statement")
-
+setdelay = Random.new.rand(1..5) 
 $inputs = {
   "email" => "ujjwalthaakar@gmail.com",
   "password" => "bharosa12"
@@ -107,7 +109,6 @@ def submit()
   submitbutton.click()
 end
 
-setdelay = 1
 passtos()
 sleep(setdelay)
 selectdetailed()
@@ -123,14 +124,17 @@ inputpassword()
 sleep(setdelay)
 confirmpassword()
 sleep(setdelay)
-submit()
-sleep(5)
+# submit()
+# sleep(5)
 puts("\n\n\n\n\n")
 raw = $driver.page_source
 divsuccesstext = $driver.find_element(:css, "body > app-root > div > app-investtransact > div.correct-details.ng-star-inserted > div > div:nth-child(1) > div:nth-child(2) > div > app-statements > div > div > div").text
 innerdivtext = $driver.find_element(:css, "body > app-root > div > app-investtransact > div.correct-details.ng-star-inserted > div > div:nth-child(1) > div:nth-child(2) > div > app-statements > div > div > div > div:nth-child(4) > p").text
-
-puts(divsuccesstext)
-puts("\n")
-print(innerdivtext)
+m = innerdivtext.match /Your CAMS \+ KFintech summary has been sent to your registered email id (.+) Your reference number is (.+)./
+puts "email: " + m[1] + "\n"
+puts "reference number": m[2] + "\n"
+puts "delay used: "+ setdelay
+# puts(divsuccesstext)
+# puts("\n")
+# print(innerdivtext)
 sleep
