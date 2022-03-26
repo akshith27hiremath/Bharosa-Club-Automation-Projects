@@ -6,12 +6,27 @@ options = Selenium::WebDriver::Chrome::Options.new
 # options.add_argument('--headless')
 $driver = Selenium::WebDriver.for :chrome, options: options
 $driver.get("https://www.camsonline.com/Investors/Statements/Consolidated-Account-Statement")
+
+# setdelay = Random.new.rand(1..5) 
+setdelay = 1 
+
 $inputs = {
   "email" => "ujjwalthaakar@gmail.com",
   "password" => "bharosa12"
 }
+
 wait = Selenium::WebDriver::Wait.new(:timeout => 10)
-ele = wait.until { $driver.find_element(xpath: '//*[@id="mat-radio-2"]')} #wait for accept radio button to load in
+ele = wait.until { $driver.find_element(xpath: '//*[@id="mat-radio-2"]')}
+
+# def makeradiovisiblefull()
+#   removeoutercircle = "const outer = document.querySelectorAll('.mat-radio-outer-circle'); outer.forEach(box => { box.remove(); });"
+#   removeinnercircle = "const inner = document.querySelectorAll('.mat-radio-inner-circle'); inner.forEach(box => { box.remove(); });"
+#   makeradiosvisible = "for (elem of document.getElementsByClassName('cdk-visually-hidden')) { elem.classList.remove('cdk-visually-hidden'); }"
+#   $driver.execute_script(removeoutercircle)
+#   $driver.execute_script(removeinnercircle)
+#   $driver.execute_script(makeradiosvisible)
+# end
+# makeradiovisiblefull()
 
 def passtos()
   acceptradio = $driver.find_element(:xpath, "//*[@id='mat-radio-2']/label/div[1]/div[1]")
@@ -101,4 +116,8 @@ innerdivtext = $driver.find_element(:css, "body > app-root > div > app-investtra
 m = innerdivtext.match /Your CAMS \+ KFintech summary has been sent to your registered email id (.+) Your reference number is (.+)./
 puts "email: " + m[1] + "\n"
 puts "reference number": m[2] + "\n"
+# puts "delay used: "+ setdelay
+# puts(divsuccesstext)
+# puts("\n")
+# print(innerdivtext)
 sleep
