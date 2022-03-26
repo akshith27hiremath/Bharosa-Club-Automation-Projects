@@ -140,8 +140,8 @@ inputpassword()
 wait(setdelay)
 confirmpassword()
 wait(setdelay)
-submit()
-wait(5)
+# submit()
+# wait(5)
 
 print("\n\n\n")
 raw = driver.page_source
