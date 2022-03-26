@@ -1,41 +1,43 @@
 require 'selenium-webdriver'
+
 $tab = Selenium::WebDriver::Keys::KEYS[:tab]
 Selenium::WebDriver::Chrome.driver_path = "D:/chromedriver.exe"
 options = Selenium::WebDriver::Chrome::Options.new
-options.add_argument('--headless')
+# options.add_argument('--headless')
 $driver = Selenium::WebDriver.for :chrome, options: options
 $driver.get("https://www.camsonline.com/Investors/Statements/Consolidated-Account-Statement")
-setdelay = Random.new.rand(1..5) 
+
+# setdelay = Random.new.rand(1..5) 
+setdelay = 1 
+
 $inputs = {
   "email" => "ujjwalthaakar@gmail.com",
   "password" => "bharosa12"
 }
-def makeradiovisiblefull()
-  removeoutercircle = "const outer = document.querySelectorAll('.mat-radio-outer-circle'); outer.forEach(box => { box.remove(); });"
-  removeinnercircle = "const inner = document.querySelectorAll('.mat-radio-inner-circle'); inner.forEach(box => { box.remove(); });"
-  makeradiosvisible = "for (elem of document.getElementsByClassName('cdk-visually-hidden')) { elem.classList.remove('cdk-visually-hidden'); }"
-  $driver.execute_script(removeoutercircle)
-  $driver.execute_script(removeinnercircle)
-  $driver.execute_script(makeradiosvisible)
-end
-makeradiovisiblefull()
+
+wait = Selenium::WebDriver::Wait.new(:timeout => 10)
+ele = wait.until { $driver.find_element(xpath: '//*[@id="mat-radio-2"]')}
+
+# def makeradiovisiblefull()
+#   removeoutercircle = "const outer = document.querySelectorAll('.mat-radio-outer-circle'); outer.forEach(box => { box.remove(); });"
+#   removeinnercircle = "const inner = document.querySelectorAll('.mat-radio-inner-circle'); inner.forEach(box => { box.remove(); });"
+#   makeradiosvisible = "for (elem of document.getElementsByClassName('cdk-visually-hidden')) { elem.classList.remove('cdk-visually-hidden'); }"
+#   $driver.execute_script(removeoutercircle)
+#   $driver.execute_script(removeinnercircle)
+#   $driver.execute_script(makeradiosvisible)
+# end
+# makeradiovisiblefull()
 
 def passtos()
-  makeradiovisible = 'document.getElementById("mat-radio-2-input").classList.remove("cdk-visually-hidden")'
-  $driver.execute_script(makeradiovisible)
-  acceptradio = $driver.find_element(:css, "input#mat-radio-2-input")
+  acceptradio = $driver.find_element(:xpath, "//*[@id='mat-radio-2']/label/div[1]/div[1]")
   acceptradio.click()
-  sleep(1)
   proceed = $driver.find_element(:css, "input.check-now-btn.mr-right")
   proceed.click()
   puts("accept tos clicked")
 end
 
 def selectdetailed()
-  makeradiovisible = 'document.getElementById("mat-radio-6-input").classList.remove("cdk-visually-hidden")'
-  sleep(0.5)
-  $driver.execute_script(makeradiovisible)
-  detailedradio = $driver.find_element(:id, "mat-radio-6-input")
+  detailedradio = $driver.find_element(:xpath, "//*[@id='mat-radio-6']/label/div[1]/div[2]")
   detailedradio.click()
 end
 
@@ -61,18 +63,12 @@ def confirmpassword()
 end
 
 def choosetimeperiod()
-  makeradiovisiblefull()
-  makeradiovisible = 'document.getElementById("mat-radio-14-input").classList.remove("cdk-visually-hidden")'
-  $driver.execute_script(makeradiovisible)
-  specifictp = $driver.find_element(:id, "mat-radio-14-input")
+  specifictp = $driver.find_element(:xpath, "//*[@id='mat-radio-14']/label/div[1]/div[1]")
   specifictp.click()
 end
 
 def allow0balancefolios()
-  makeradiovisiblefull()
-  makeradiovisible = 'document.getElementById("mat-radio-8-input").classList.remove("cdk-visually-hidden")'
-  $driver.execute_script(makeradiovisible)
-  balancefolios = $driver.find_element(:id, "mat-radio-8-input")
+  balancefolios = $driver.find_element(:xpath, "//*[@id='mat-radio-8']/label/div[1]/div[2]")
   balancefolios.click()
 end
 
@@ -81,27 +77,20 @@ def settimeperiods()
   print("\n\n\n\n")
   print(datesvg)
   datesvg[0].click()
-  sleep(1)
   wideyear = $driver.find_element(:css, "button[aria-label='Choose month and year']")
   wideyear.click()
   prev20 = $driver.find_element(:css, "button[aria-label='Previous 20 years']")
   prev20.click()
-  sleep(0.5)
   prev20 = $driver.find_element(:css, "button[aria-label='Previous 20 years']")
   prev20.click()
-  sleep(0.5)
   prev20 = $driver.find_element(:css, "button[aria-label='Previous 20 years']")
   prev20.click()
-  sleep(0.5)
   yr1960 = $driver.find_element(:css, "td[aria-label='1960']")
   yr1960.click()
-  sleep(0.5)
   jan = $driver.find_element(:css, "td[aria-label='01-Jan-1960']")
   jan.click()
-  sleep(0.5)
   jan = $driver.find_element(:css, "td[aria-label='01-Jan-1960']")
   jan.click()
-  sleep(0.5)
 end
 
 def submit()
@@ -110,22 +99,16 @@ def submit()
 end
 
 passtos()
-sleep(setdelay)
 selectdetailed()
-sleep(setdelay)
 choosetimeperiod()
-sleep(setdelay)
-allow0balancefolios()
-sleep(setdelay)
+# allow0balancefolios()
 settimeperiods()
 inputmail()
-sleep(setdelay)
+load = wait.until { $driver.find_element(xpath: '//*[@id="mat-input-1"]')}
 inputpassword()
-sleep(setdelay)
 confirmpassword()
-sleep(setdelay)
 # submit()
-# sleep(5)
+# load2 = wait.until ( $driver.find_element(xpath: 'xpath to success div'))
 puts("\n\n\n\n\n")
 raw = $driver.page_source
 divsuccesstext = $driver.find_element(:css, "body > app-root > div > app-investtransact > div.correct-details.ng-star-inserted > div > div:nth-child(1) > div:nth-child(2) > div > app-statements > div > div > div").text
@@ -133,7 +116,7 @@ innerdivtext = $driver.find_element(:css, "body > app-root > div > app-investtra
 m = innerdivtext.match /Your CAMS \+ KFintech summary has been sent to your registered email id (.+) Your reference number is (.+)./
 puts "email: " + m[1] + "\n"
 puts "reference number": m[2] + "\n"
-puts "delay used: "+ setdelay
+# puts "delay used: "+ setdelay
 # puts(divsuccesstext)
 # puts("\n")
 # print(innerdivtext)
