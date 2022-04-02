@@ -1,7 +1,7 @@
 require 'selenium-webdriver'
 require 'webdrivers'
 
-CAS_URL = "https://www.camsonline.com/Investors/Statements/Consolidated-Account-Statement"  
+CAS_URL = "https://www.camsonline.com/Investors/Statements/Consolidated-Account-Statement"
 # Scripts
 MAKE_RADIOS_VISIBLE = <<-JS
   document.querySelectorAll('.mat-radio-outer-circle', '.mat-radio-inner-circle').forEach(o => o.remove())
@@ -10,9 +10,7 @@ JS
 
 # Request a CAS from CAMS using selenium
 def fetch_for(email, password)
-  opts = Selenium::WebDriver::Chrome::Options.new
-  opts.add_argument('--headless')
-  @driver = Selenium::WebDriver.for :chrome, capabilities: [opts]
+  @driver = Selenium::WebDriver.for :chrome, capabilities: [chrome_opts]
   @driver.navigate.to CAS_URL
 
   # Make all radio button visible so we can click them
@@ -85,4 +83,16 @@ end
 # Random delay before every action
 def simulate_human_slowness
   sleep rand(0.5..10.0)
+end
+
+def chrome_opts
+  opts = Selenium::WebDriver::Chrome::Options.new
+  opts.add_argument('--headless')
+  opts.add_argument('start-maximized')
+  opts.add_argument('disable-infobars')
+  opts.add_argument('--disable-extensions')
+  opts.add_argument('--disable-gpu')
+  opts.add_argument('--disable-dev-shm-usage')
+  opts.add_argument('--no-sandbox')
+  return opts
 end
