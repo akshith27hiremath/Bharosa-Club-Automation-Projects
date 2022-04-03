@@ -1,15 +1,21 @@
 require 'selenium-webdriver'
+require 'webdrivers'
 
-$tab = Selenium::WebDriver::Keys::KEYS[:tab]
-Selenium::WebDriver::Chrome.driver_path = "D:/chromedriver.exe"
+pathused = "./webdrivers/install/dir"
+Webdrivers.install_dir = pathused
+
 options = Selenium::WebDriver::Chrome::Options.new
 # options.add_argument('--headless')
 $driver = Selenium::WebDriver.for :chrome, options: options
 $driver.get("https://www.camsonline.com/Investors/Statements/Consolidated-Account-Statement")
+
+$tab = Selenium::WebDriver::Keys::KEYS[:tab]
+
 $inputs = {
   "email" => "ujjwalthaakar@gmail.com",
   "password" => "bharosa12"
 }
+
 wait = Selenium::WebDriver::Wait.new(:timeout => 10)
 ele = wait.until { $driver.find_element(xpath: '//*[@id="mat-radio-2"]')} #wait for accept radio button to load in
 

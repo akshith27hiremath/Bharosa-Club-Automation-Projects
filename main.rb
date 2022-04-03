@@ -1,8 +1,8 @@
 require 'selenium-webdriver'
 $tab = Selenium::WebDriver::Keys::KEYS[:tab]
-Selenium::WebDriver::Chrome.driver_path = "D:/chromedriver.exe"
+# Selenium::WebDriver::Chrome.driver_path = "D:/chromedriver.exe"
 options = Selenium::WebDriver::Chrome::Options.new
-options.add_argument('--headless')
+# options.add_argument('--headless')
 $driver = Selenium::WebDriver.for :chrome, options: options
 $driver.get("https://www.camsonline.com/Investors/Statements/Consolidated-Account-Statement")
 setdelay = Random.new.rand(1..5) 
