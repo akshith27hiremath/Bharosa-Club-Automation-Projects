@@ -8,6 +8,8 @@ $inputs = {
   "mode" => "normal"
 }
 
+SUBMIT = false # for testing purposes
+
 pathused = "./webdrivers/install/dir"
 Webdrivers.install_dir = pathused
 options = Selenium::WebDriver::Chrome::Options.new
@@ -102,8 +104,12 @@ inputmail()
 load = wait.until { $driver.find_element(xpath: '//*[@id="mat-input-1"]')}
 inputpassword()
 confirmpassword()
-# submit()
-# load2 = wait.until ( $driver.find_element(xpath: 'xpath to success div'))
+
+if SUBMIT
+  submit()
+  load2 = wait.until ( $driver.find_element(xpath: 'xpath to success div'))
+end
+
 puts("\n\n\n\n\n")
 raw = $driver.page_source
 divsuccesstext = $driver.find_element(:css, "body > app-root > div > app-investtransact > div.correct-details.ng-star-inserted > div > div:nth-child(1) > div:nth-child(2) > div > app-statements > div > div > div").text
