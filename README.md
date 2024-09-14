@@ -9,4 +9,6 @@
 2. CAS pdf retrieval with Selenium
 <b>Important: </b> Code is now non functional as the website it parses has modified its layout since 2021. <br> <b>Included</b> as it was directly used in a company's core code base to automate the onboarding over 1200 customers, so I grouped it with my other major project for this company :)
 
+<b> Learnt Ruby and Selenium to automate the retrieval of CAS data, where it inputs a users information whilst simulating human activity, submits the request, and retrieves the reference number and request confirmation where the PDF can be found.
+
 ## Proof of the selenium project working can be found in the LOR in the repository.

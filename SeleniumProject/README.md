@@ -1,6 +1,6 @@
 ## CAS pdf retrieval with Selenium
 
-## This code is now non functional due to changes made to the original website it parses. I have included an LOR that attests to its functionality at the time of its requriement.
+## This code is now non functional due to changes made to the original website it parses. <br>I have included an LOR that attests to its functionality at the time of its requriement.
 
 ### Prereqs
 Ruby version: ruby 3.0.2p107 (2021-07-07 revision 0db68f0233) [x64-mingw32] <br />
