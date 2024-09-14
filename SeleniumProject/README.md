@@ -1,6 +1,7 @@
 ## CAS pdf retrieval with Selenium
 
-## This code is now deprecated due to changes made to the original website it parses, however I have included an excerpt from the LOR
+## This code is now deprecated due to changes made to the original website it parses 
+### I have included an excerpt from the LOR to attest to its functionality.
 
 ### Prereqs
 gem install webdrivers and pip install selenium <br/>
