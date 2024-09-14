@@ -5,7 +5,7 @@
 ## See folders for comprehensive READMEs. <br>
 1. Regex Bond Ratings Data Extraction
 
-<b>Used regex in order to clean and extract data from a csv file of companies' bond ratings. </b> <br> I believe my annotations and comments to this code will give better insights into my thought processes as a developer. <br><br>
+Used regex within Ruby in order to clean and extract data from a csv file of companies' bond ratings. <br> <b>I believe my annotations and comments to this code will give better insights into my thought processes as a developer.</b> <br><br>
 
 2. CAS pdf retrieval with Selenium
 
